@@ -24,19 +24,10 @@ public class RedisConfig {
         return new LettuceConnectionFactory(new RedisStandaloneConfiguration("localhost", 6379));
     }
 
-    /*
-    @Bean
-    public RedisCacheConfiguration defaultCacheConfiguration() {
-        return RedisCacheConfiguration.defaultCacheConfig()
-                .entryTtl(Duration.ofMillis(10000))// 2 horas
-                .disableCachingNullValues()
-                .serializeValuesWith(fromSerializer(new GenericJackson2JsonRedisSerializer()));
-    }
-    */
     @Bean
     public RedisCacheManager cacheManager(RedisConnectionFactory connectionFactory) {
         RedisCacheConfiguration defaults =  RedisCacheConfiguration.defaultCacheConfig()
-                .entryTtl(Duration.ofMillis(10000))// 2 horas
+                .entryTtl(Duration.ofMinutes(10))// 2 horas
                 .disableCachingNullValues()
                 .serializeValuesWith(fromSerializer(new GenericJackson2JsonRedisSerializer()));
 

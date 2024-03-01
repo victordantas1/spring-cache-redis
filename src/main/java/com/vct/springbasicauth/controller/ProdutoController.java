@@ -14,6 +14,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
+@RequestMapping("produtos")
 public class ProdutoController {
 
     @Autowired
@@ -22,17 +23,17 @@ public class ProdutoController {
     @Autowired
     private ProdutoService service;
 
-    @GetMapping("/produtos")
+    @GetMapping
     public ResponseEntity<List<Produto>> findAll() throws InterruptedException {
         return ResponseEntity.ok().body(service.getAll());
     }
 
-    @GetMapping("/produtos/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Produto> findOne(@PathVariable Long id) throws InterruptedException {
         return ResponseEntity.ok().body(service.getOne(id).get());
     }
 
-    @PostMapping("/produtos")
+    @PostMapping
     public ResponseEntity<Produto> addProduct(@RequestBody ProdutoDTO produto) {
         Produto prod = new Produto();
         prod.converte(produto);
